@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/jquery-1.11.2.min.js"> </script>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h2>Handlebars element helper</h2><pre class="prettyprint source"><code>{{#el}}content{{/el}}</code></pre><p>Content helper providing html elements for <a href="http://handlebarsjs.com">Handlebars</a></p>
+<h3>Version</h3><p>1.0.0</p>
+<h3>Installation</h3><pre class="prettyprint source"><code>npm install handlebars.el</code></pre><h3>Registering the helper</h3><pre class="prettyprint source"><code> var Handlebars = require(&quot;handlebars&quot;);
+ var ElHelper = require(&quot;handlebars.el&quot;);
+ ElHelper.registerHelper(Handlebars);</code></pre><h3>Using the helper</h3><p>Content handling</p>
+<pre class="prettyprint source"><code>{{#el}}foo{{/el}}                           → «&lt;div>foo&lt;/div>»
+
+{{{el &quot;foo&quot;}}}                              → «&lt;div>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot;}}}                      → «&lt;div>foo&lt;/div>»
+
+{{#el content=&quot;bar&quot;}}foo{{/el}}             → «&lt;div>foo&lt;/div>»
+
+{{#el}}{{fooVar}}{{/el}}
+Context {fooVar: &quot;foo&quot;}                     → «&lt;div>foo&lt;/div>»</code></pre><p> Attribute handling</p>
+<pre class="prettyprint source"><code>{{#el class=&quot;bar&quot;}}foo{{/el}}               → «&lt;div class=&quot;bar&quot;>foo&lt;/div>»
+
+{{#el id=&quot;bam&quot; class=&quot;bar&quot;}}foo{{/el}}      → «&lt;div class=&quot;bar&quot; id=&quot;bam&quot;>foo&lt;/div>»
+
+{{#el class=&quot;bar&quot; id=&quot;bam&quot;}}foo{{/el}}      → «&lt;div class=&quot;bar&quot; id=&quot;bam&quot;>foo&lt;/div>»
+
+{{#el class=&quot;bar&quot; attributes=attrs}}foo{{/el}}
+Context {attrs:attrs}                       → «&lt;div class=&quot;bar&quot; id=&quot;bam&quot;>foo&lt;/div>»</code></pre><p>Content escaping</p>
+<pre class="prettyprint source"><code>{{#el}}&lt;i>foo&lt;/i>{{/el}}                    → «&lt;div>&lt;i&gt;foo&lt;/i&gt;&lt;/div>»
+
+{{#el el-escape=true}}&lt;i>foo&lt;/i>{{/el}}     → «&lt;div>&lt;i&gt;foo&lt;/i&gt;&lt;/div>»
+
+{{#el el-escape=false}}&lt;i>foo&lt;/i>{{/el}}    → «&lt;div>&lt;i>foo&lt;/i>&lt;/div>»
+
+{{#el attributes=attrs}}&lt;i>foo&lt;/i>{{/el}}
+Context {attrs:{ &quot;el-escape&quot;: false }}      → «&lt;div>&lt;i>foo&lt;/i>&lt;/div>»</code></pre><p>Trimming content</p>
+<pre class="prettyprint source"><code>{{{el content=&quot; foo &quot;}}}                    → «&lt;div>foo&lt;/div>»
+
+{{{el content=&quot; foo &quot; el-trim=false}}}      → «&lt;div> foo &lt;/div>»
+
+{{{el content=&quot; \n foo \t   &quot;}}}            → «&lt;div>foo&lt;/div>»</code></pre><p>Suppressing output when no content</p>
+<pre class="prettyprint source"><code>{{#el}}{{fooVar}}{{/el}}                    → «»
+
+{{#el content=&quot;bar&quot;}}{{fooVar}}{{/el}}      → «»
+
+{{#el}}     {{/el}}                         → «»
+
+{{{el el-tag=&quot;textarea&quot;}}}                  → «&lt;textarea>&lt;/textarea>»</code></pre><p>Empty elements</p>
+<pre class="prettyprint source"><code>{{{el el-tag=&quot;img&quot; src=&quot;foo.gif&quot;}}}         → «&lt;img alt=&quot;&quot; src=&quot;foo.gif&quot;>»</code></pre><p>Empty attributes</p>
+<pre class="prettyprint source"><code>{{#el class=&quot;&quot;}}foo{{/el}}                  → «&lt;div>foo&lt;/div>»
+
+{{#el class=&quot;&quot;}}foo{{/el}}                  → «&lt;div>foo&lt;/div>»
+
+{{#el el-tag=&quot;input&quot; class=&quot;&quot; value=&quot;&quot;}}foo{{/el}}
+    → «&lt;input value=&quot;&quot;>»
+
+{{#el el-tag=&quot;input&quot; value=0}}foo{{/el}}    → «&lt;input value=&quot;0&quot;>»</code></pre><p>Alt attribute</p>
+<pre class="prettyprint source"><code>{{{el el-tag=&quot;img&quot; src=&quot;foo.gif&quot; alt=&quot;bar&quot;}}}
+    → «&lt;img alt=&quot;bar&quot; src=&quot;foo.gif&quot;>»
+
+{{{el el-tag=&quot;img&quot; src=&quot;foo.gif&quot; alt=baz}}}
+Context {baz:&quot;bar&quot;}
+    → «&lt;img alt=&quot;bar&quot; src=&quot;foo.gif&quot;>»
+
+{{{el el-tag=&quot;img&quot; src=&quot;foo.gif&quot; alt=baz}}}
+    → «&lt;img alt=&quot;&quot; src=&quot;foo.gif&quot;>»</code></pre><p>Value attribute</p>
+<pre class="prettyprint source"><code>{{{el el-tag=&quot;input&quot;}}}                     → «&lt;input>»
+
+{{{el el-tag=&quot;input&quot; value=&quot;&quot;}}}            → «&lt;input value=&quot;&quot;>»
+
+{{{el el-tag=&quot;input&quot; value=0}}}             → «&lt;input value=&quot;0&quot;>»
+
+{{{el el-tag=&quot;input&quot; value=1}}}             → «&lt;input value=&quot;1&quot;>»</code></pre><p>Boolean attributes</p>
+<pre class="prettyprint source"><code>{{{el el-tag=&quot;input&quot; type=&quot;checkbox&quot; checked=true}}}
+    → «&lt;input checked type=&quot;checkbox&quot;>»
+
+{{{el el-tag=&quot;input&quot; type=&quot;checkbox&quot; checked=false}}}
+    → «&lt;input type=&quot;checkbox&quot;>»
+
+{{{el el-tag=&quot;input&quot; type=&quot;checkbox&quot; checked=&quot;true&quot;}}}
+    → «&lt;input checked type=&quot;checkbox&quot;>»
+
+{{{el el-tag=&quot;input&quot; type=&quot;checkbox&quot; checked=&quot;&quot;}}}
+    → «&lt;input type=&quot;checkbox&quot;>»
+
+{{{el el-tag=&quot;input&quot; type=&quot;checkbox&quot; checked=0}}}
+    → «&lt;input type=&quot;checkbox&quot;>»</code></pre><p>Attribute escaping</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; class=&quot;\\&quot;bar\\&quot;&quot;}}}
+    → «&lt;div class=&quot;&quot;bar&quot;&quot;>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; class=&quot;&quot;bar&quot;&quot; el-escape-class=false}}}
+    → «&lt;div class=&quot;&quot;bar&quot;&quot;>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; class=&quot;&quot;bar&quot;&quot; el-escape-class=true}}}
+    → «&lt;div class=&quot;&amp;quot;bar&amp;quot;&quot;>foo&lt;/div>»</code></pre><p>Element classes</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; class=&quot;bar&quot;}}}          → «&lt;div class=&quot;bar&quot;>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; class=bar}}}
+Context {bar: [&quot;klass1&quot;, &quot;klass2&quot;]}         → «&lt;div class=&quot;klass1 klass2&quot;>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; class=bar}}}
+Context {bar: [&quot;klass2&quot;, &quot;klass1&quot;]}         → «&lt;div class=&quot;klass1 klass2&quot;>foo&lt;/div>»</code></pre><p>URL handling</p>
+<pre class="prettyprint source"><code>{{{el el-tag=&quot;a&quot; href=&quot;/foo/bar&quot; content=&quot;foo&quot;}}}
+    → «&lt;a href=&quot;/foo/bar&quot;>foo&lt;/a>»
+
+{{{el el-tag=&quot;a&quot; href=&quot;/foo/bar?bam=1&bim=2&quot; content=&quot;foo&quot;}}}
+    → «&lt;a href=&quot;/foo/bar?bam=1&amp;bim=2&quot;>foo&lt;/a>»
+
+{{{el el-tag=&quot;a&quot; href=&quot;//rom.com/foo/bar?bam=1&bim=2&quot; content=&quot;foo&quot;}}}
+    → «&lt;a href=&quot;//rom.com/foo/bar?bam=1&amp;bim=2&quot;>foo&lt;/a>»
+
+{{{el el-tag=&quot;a&quot; href=&quot;http://rom.com/foo/bar?bam=1&bim=2&quot; content=&quot;foo&quot;}}}
+    → «&lt;a href=&quot;http://rom.com/foo/bar?bam=1&amp;bim=2&quot;>foo&lt;/a>»
+
+{{{el el-tag=&quot;a&quot; href=&quot;https://rom.com:8080/foo/bar?bam=1&bim=2&quot; content=&quot;foo&quot;}}}
+    → «&lt;a href=&quot;https://rom.com:8080/foo/bar?bam=1&amp;bim=2&quot;>foo&lt;/a>»</code></pre><h4>Arrays, splitting and contents</h4><p>Passing content as an array</p>
+<pre class="prettyprint source"><code>{{{el content=azza}}}
+Context {azza:[&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]}        → «&lt;div>foobarbaz&lt;/div>»
+
+{{{el &quot;foo&quot; &quot;bar&quot; &quot;baz&quot;}}}                  → «&lt;div>foobarbaz&lt;/div>»</code></pre><p>Passing multiple content items</p>
+<pre class="prettyprint source"><code>{{{el contents=azza}}}
+Context {azza:[&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]}
+    → «&lt;div>foo&lt;/div>&lt;div>bar&lt;/div>&lt;div>baz&lt;/div>»
+
+{{{el &quot;foo&quot; &quot;bar&quot; &quot;baz&quot; contents=true}}}
+    → «&lt;div>foo&lt;/div>&lt;div>bar&lt;/div>&lt;div>baz&lt;/div>»
+
+{{{el &quot;foo&quot; &quot;bar&quot; &quot;baz&quot; contents=true class=&quot;klass&quot;}}}
+    → «&lt;div class=&quot;klass&quot;>foo&lt;/div>&lt;div class=&quot;klass&quot;>bar&lt;/div>&lt;div class=&quot;klass&quot;>baz&lt;/div>»</code></pre><p>Splitting delimited content</p>
+<pre class="prettyprint source"><code>{{#el}}foo\nbar\nbaz{{/el}}                 → «&lt;div>foobarbaz&lt;/div>»
+
+{{#el el-split=&quot;,&quot;}}foo,bar,baz{{/el}}      → «&lt;div>foobarbaz&lt;/div>»
+
+{{#el el-split=&quot;,&quot; contents=true}}foo,bar,baz{{/el}}
+    → «&lt;div>foo&lt;/div>&lt;div>bar&lt;/div>&lt;div>baz&lt;/div>»
+
+{{#el el-split=false}}foo\nbar\nbaz{{/el}}
+    → «&lt;div>foo\nbar\nbaz&lt;/div>»</code></pre><h4>Wrapping output</h4><p>Wrapping content</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-wrap=&quot;p&quot;}}}          → «&lt;div>&lt;p>foo&lt;/p>&lt;/div>»
+
+{{{el content=&quot;foo&quot; el-wrap=wrap}}}
+Context {wrap: {class:&quot;bar&quot;, &quot;el-tag&quot;:&quot;p&quot;}}
+    → «&lt;div>&lt;p class=&quot;bar&quot;>foo&lt;/p>&lt;/div>»
+
+{{{el content=&quot;foo\nbaz&quot; el-wrap=wrap}}}
+Context {wrap: {class:&quot;bar&quot;, &quot;el-tag&quot;:&quot;p&quot;}}
+    → «&lt;div>&lt;p class=&quot;bar&quot;>foo&lt;/p>&lt;p class=&quot;bar&quot;>baz&lt;/p>&lt;/div>»
+
+{{{el content=&quot;foo\nbaz&quot; class=&quot;wham&quot; el-wrap=wrap}}}
+Context {wrap: {class:&quot;bar&quot;, &quot;el-tag&quot;:&quot;p&quot;}}
+    → «&lt;div class=&quot;wham&quot;>&lt;p class=&quot;bar&quot;>foo&lt;/p>&lt;p class=&quot;bar&quot;>baz&lt;/p>&lt;/div>»
+
+{{{el content=&quot;foo\nbaz&quot; class=&quot;wham&quot; el-wrap-all=wrap}}}
+Context {wrap: {class:&quot;bar&quot;, &quot;el-tag&quot;:&quot;p&quot;}}
+    → «&lt;div class=&quot;wham&quot;>&lt;p class=&quot;bar&quot;>foobaz&lt;/p>&lt;/div>»
+
+{{{el contents=&quot;foo\nbaz&quot; class=&quot;a&quot; el-wrap=wrap}}}
+Context {wrap: {class:&quot;b&quot;, &quot;el-tag&quot;:&quot;p&quot;}}
+    → «&lt;div class=&quot;a&quot;>&lt;p class=&quot;b&quot;>foo&lt;/p>&lt;/div>&lt;div class=&quot;a&quot;>&lt;p class=&quot;b&quot;>baz&lt;/p>&lt;/div>»</code></pre><p>Wrapping element</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-wrap-outer=wrap}}}
+Context {wrap: {&quot;el-tag&quot;: &quot;section&quot;}}
+    → «&lt;section>&lt;div>foo&lt;/div>&lt;/section>»
+
+{{{el content=&quot;foo&quot; el-wrap-outer=&quot;section&quot;}}}
+    → «&lt;section>&lt;div>foo&lt;/div>&lt;/section>»
+
+{{{el contents=&quot;bar\nbaz&quot; el-wrap-outer=wrap el-tag=&quot;p&quot;}}}
+Context {wrap: { &quot;el-tag&quot;: &quot;div&quot;, class: &quot;display&quot;}}
+    → «&lt;div class=&quot;display&quot;>&lt;p>bar&lt;/p>&lt;p>baz&lt;/p>&lt;/div>»
+
+{{{el content=&quot;zim\nzam&quot; el-wrap=wrap class=&quot;display&quot; el-tag=&quot;div&quot;}}}
+Context {wrap: { &quot;el-tag&quot;: &quot;p&quot;}}
+    → «&lt;div class=&quot;display&quot;>&lt;p>zim&lt;/p>&lt;p>zam&lt;/p>&lt;/div>»</code></pre><h4>Aborting output</h4><p>Aborting element generation (but outputting content)</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-abort=true}}}        → «foo»
+
+{{{el content=&quot;foo&quot; el-abort=false}}}       → «&lt;div>foo&lt;/div>»
+
+{{{el content=&quot;foo\nbar&quot; el-abort=true}}}   → «foobar»
+
+{{{el content=azza el-abort=true}}}
+Context {azza:[&quot;foo&quot;, &quot;bar&quot;]}               → «foobar»</code></pre><p>Aborting element and content</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-abort-all=true}}}    → «»
+
+{{{el content=&quot;foo&quot; el-abort-all=false}}}   → «&lt;div>foo&lt;/div>»</code></pre><h4>Fallbacks</h4><p>Providing fallback content</p>
+<pre class="prettyprint source"><code>{{{el el-fallback=&quot;foo&quot;}}}                  → «&lt;div>foo&lt;/div>»
+
+{{{el el-fallback=&quot; foo &quot;}}}                → «&lt;div>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; el-fallback=&quot;foo&quot;}}}    → «&lt;div>foo&lt;/div>»</code></pre><p>Providing a fallback class</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-fallback-class=&quot;bar&quot;}}}
+    → «&lt;div class=&quot;bar&quot;>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; class=&quot;bar&quot; el-fallback-class=&quot;baz&quot;}}}
+    → «&lt;div class=&quot;bar&quot;>foo&lt;/div>»
+
+{{{el content=&quot;foo&quot; class=klass el-fallback-class=fallback}}}
+Context {klass:[], fallback:[&quot;klass1&quot;, &quot;klass2&quot;]}
+    → «&lt;div class=&quot;klass1 klass2&quot;>foo&lt;/div>»</code></pre><h4>Conditional output</h4><p>Outputting first matched content</p>
+<pre class="prettyprint source"><code>{{{el content=azza el-first-match=true}}}
+Context {azza: [&quot;&quot;, this.gzzzarn, &quot;foo&quot;]}   → «&lt;div>foo&lt;/div>»
+
+{{{el content=azza el-first-match=true}}}
+Context {azza: [&quot;&quot;, this.gzzzarn, 0]}       → «&lt;div>0&lt;/div>»
+
+{{{el content=azza el-first-match=true}}}
+Context {azza: [&quot;&quot;, this.gzzzarn, &quot;0&quot;]}     → «&lt;div>0&lt;/div>»</code></pre><p>Outputting ternary content</p>
+<pre class="prettyprint source"><code>{{{el content=azza el-ternary=true}}}
+Context {azza: [&quot;foo&quot;, &quot;bar&quot;]}              → «&lt;div>foo&lt;/div>»
+
+{{{el content=azza el-ternary=false}}}
+Context {azza: [&quot;foo&quot;, &quot;bar&quot;]}              → «&lt;div>bar&lt;/div>»
+
+{{{el content=azza el-ternary=true}}}
+Context {azza: [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]}       → «&lt;div>foobarbaz&lt;/div>»
+// more than 2 values</code></pre><h4>Advanced methods of passing content and attributes</h4><p>Passing attributes as JSON strings</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-wrap=&quot;{'el-tag':'p', class:'bar'}&quot;}}}
+    → «&lt;div>&lt;p class=&quot;bar&quot;>foo&lt;/p>&lt;/div>»
+
+{{{el content=&quot;foo&quot; el-wrap=&quot;{ \'el-tag\': context.taggo}&quot; }}}
+Context {taggo:&quot;span&quot;}
+    → «&lt;div>&lt;span>foo&lt;/span>&lt;/div>»</code></pre><p>Passing content as a function</p>
+<pre class="prettyprint source"><code>var fn = function () {
+    return &quot;foo&quot;;
+};
+{{{el content=fn}}}
+Context {fn: fn}                            → «&lt;div>foo&lt;/div>»
+
+var fn2 = function (x) {
+    return x === &quot;a&quot; ? &quot;foo&quot; : &quot;bar&quot;;
+};
+{{{el content=fn el-params-content=&quot;a&quot;}}}
+Context {fn: fn2}                           → «&lt;div>foo&lt;/div>»
+
+{{{el content=fn el-params-content=&quot;b&quot;}}}
+Context {fn: [fn, fn2]}                     → «&lt;div>foobar&lt;/div>»</code></pre><p>Passing attributes as functions</p>
+<pre class="prettyprint source"><code>var fn = function() {
+    return &quot;bar&quot;;
+};
+{{{el content=&quot;foo&quot; id=fn}}}
+Context {fn: fn}                            → «&lt;div id=&quot;bar&quot;>foo&lt;/div>»
+
+var fn2 = function(x) {
+    return x === &quot;a&quot; ? &quot;bar&quot; : &quot;foo&quot;;
+};
+{{{el content=&quot;foo&quot; id=fn el-params-id=&quot;a&quot;}}}
+Context {fn: fn2}                           → «&lt;div id=&quot;bar&quot;>foo&lt;/div>»</code></pre><h4>Miscellaneous</h4><p>JSON in attributes</p>
+<pre class="prettyprint source"><code>{{{el content=&quot;foo&quot; el-escape-id=false id=&quot;{bar:'true'}&quot;}}}
+Context {azza:[&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]}        → «&lt;div id=&quot;{bar:\'true\'}&quot;>foo&lt;/div>»</code></pre><p>Meta element may take content as an attribute</p>
+<pre class="prettyprint source"><code>{{{el el-tag=&quot;meta&quot; http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=UTF-8&quot;}}}
+    → «&lt;meta content=&quot;text/html;charset=UTF-8&quot; http-equiv=&quot;content-type&quot;>»</code></pre><p>See <a href="template-el.html">el</a></p>
+<h3>Tests</h3><p>To run the tests, cd to the handlebars.el directory</p>
+<pre class="prettyprint source"><code>npm install && npm test</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3 class="modules">Modules</h3><ul><li><a href="module-handlebars%2525el.html">handlebars.el</a></li></ul><h3 class="template-helpers">Template helpers</h3><ul><li><a href="template-el.html">el</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Wed Mar 25 2015 20:45:27 GMT+0000 (GMT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
