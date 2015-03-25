@@ -1,0 +1,36 @@
+{
+    "name": "handlebars.el",
+    "description": "Handlebars helper for generating html elements",
+    "version": "1.0.0",
+    "main": "handlebars.el.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/solidgoldpig/handlebars.el.git#1.0.0"
+    },
+    "homepage": "http://el.handlebars.solidgoldpig.com",
+    "bugs": "https://github.com/solidgoldpig/handlebars.el/issues",
+    "keywords": [
+        "handlebars",
+        "helper",
+        "html",
+        "element",
+        "dom",
+        "substitution"
+    ],
+    "dependencies": {
+        "handlebars.phrase": "1.0.2"
+    },
+    "devDependencies": {
+        "handlebars": ">=0.0.0",
+        "jasmine-node": "^1.14.x",
+        "log": "^1.4.0"
+    },
+    "scripts": {
+        "test": "jasmine-node --verbose spec"
+    },
+    "author": {
+        "name": "Alex Robinson",
+        "email": "handlebars.el@alex.solidgoldpig.com"
+    },
+    "license": "UNLICENSE"
+}
