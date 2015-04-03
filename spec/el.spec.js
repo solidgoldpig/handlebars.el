@@ -215,4 +215,4 @@ describe("El Templates", function () {
 });
 
 
-log.info("SET UP FINISHED");
+log.info("Described tests");

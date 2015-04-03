@@ -10,7 +10,7 @@ Phrase.registerHelpers(Handlebars);
 require("../handlebars.el").registerHelper(Handlebars);
 
 Phrase.locale("en");
-Phrase.setLanguages({
+Phrase.addLanguages({
     "en": {
         "foo": "foo phrase"
     },
