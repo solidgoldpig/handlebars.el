@@ -1,11 +1,11 @@
 {
     "name": "handlebars.el",
     "description": "Handlebars helper for generating html elements",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "main": "handlebars.el.js",
     "repository": {
         "type": "git",
-        "url": "git://github.com/solidgoldpig/handlebars.el.git#1.0.1"
+        "url": "git://github.com/solidgoldpig/handlebars.el.git#1.0.2"
     },
     "homepage": "http://el.handlebars.solidgoldpig.com",
     "bugs": "https://github.com/solidgoldpig/handlebars.el/issues",
