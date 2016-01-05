@@ -22,7 +22,7 @@ describe("El Templates", function () {
         expect(template('{{{el content="foo"}}}')).toBe("<div>foo</div>");
         expect(template('{{#el content="bar"}}foo{{/el}}')).toBe("<div>foo</div>");
         expect(template('{{#el}}{{fooVar}}{{/el}}', {fooVar: "foo"})).toBe("<div>foo</div>");
-        expect(template('{{{el el-tag="meta" http-equiv="content-type" content="text/html;charset=UTF-8"}}}')).toBe('<meta content="text/html;charset=UTF-8" http-equiv="content-type">');
+        expect(template('{{{el el-tag="meta" http-equiv="content-type" content="text/html;charset=UTF-8"}}}')).toBe('<meta content="text/html;charset&#x3D;UTF-8" http-equiv="content-type">');
     });
 
     it("should escape content correctly", function () {
@@ -97,10 +97,10 @@ describe("El Templates", function () {
 
     it("should handle urls correctly", function () {
         expect(template('{{{el el-tag="a" href="/foo/bar" content="foo"}}}')).toBe('<a href="/foo/bar">foo</a>');
-        expect(template('{{{el el-tag="a" href="/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="/foo/bar?bam=1&amp;bim=2">foo</a>');
-        expect(template('{{{el el-tag="a" href="//zed.com/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="//zed.com/foo/bar?bam=1&amp;bim=2">foo</a>');
-        expect(template('{{{el el-tag="a" href="http://zed.com/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="http://zed.com/foo/bar?bam=1&amp;bim=2">foo</a>');
-        expect(template('{{{el el-tag="a" href="https://zed.com:8080/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="https://zed.com:8080/foo/bar?bam=1&amp;bim=2">foo</a>');
+        expect(template('{{{el el-tag="a" href="/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>');
+        expect(template('{{{el el-tag="a" href="//zed.com/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="//zed.com/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>');
+        expect(template('{{{el el-tag="a" href="http://zed.com/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="http://zed.com/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>');
+        expect(template('{{{el el-tag="a" href="https://zed.com:8080/foo/bar?bam=1&bim=2" content="foo"}}}')).toBe('<a href="https://zed.com:8080/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>');
     });
 
     it("should handle content arrays correctly", function () {
