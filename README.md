@@ -6,7 +6,7 @@ Content helper providing html elements for [Handlebars](http://handlebarsjs.com)
 
 ### Version
 
-1.0.1
+1.0.5
 
 ### Installation
 
@@ -150,20 +150,22 @@ Element classes
 
 URL handling
 
+    ````
     {{{el el-tag="a" href="/foo/bar" content="foo"}}}
         → «<a href="/foo/bar">foo</a>»
 
     {{{el el-tag="a" href="/foo/bar?bam=1&bim=2" content="foo"}}}
-        → «<a href="/foo/bar?bam=1&amp;bim=2">foo</a>»
+        → «<a href="/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>»
 
     {{{el el-tag="a" href="//rom.com/foo/bar?bam=1&bim=2" content="foo"}}}
-        → «<a href="//rom.com/foo/bar?bam=1&amp;bim=2">foo</a>»
+        → «<a href="//rom.com/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>»
 
     {{{el el-tag="a" href="http://rom.com/foo/bar?bam=1&bim=2" content="foo"}}}
-        → «<a href="http://rom.com/foo/bar?bam=1&amp;bim=2">foo</a>»
+        → «<a href="http://rom.com/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>»
 
     {{{el el-tag="a" href="https://rom.com:8080/foo/bar?bam=1&bim=2" content="foo"}}}
-        → «<a href="https://rom.com:8080/foo/bar?bam=1&amp;bim=2">foo</a>»
+        → «'<a href="https://rom.com:8080/foo/bar?bam&#x3D;1&amp;bim&#x3D;2">foo</a>»
+    ````
 
 #### Arrays, splitting and contents
 
